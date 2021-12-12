@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Linq;
 
 public class PrimesSieve
 {
@@ -13,21 +14,13 @@ public class PrimesSieve
 
         Console.WriteLine();
 
-        Primes = new bool[Maximum + 1];
-
-        for (int C = 0; C < Primes.Length; C++)
-        {
-            Primes[C] = true;
-        }
+        Primes = Enumerable.Repeat(true, Maximum).ToArray();
 
         for (int C = 2; C < Math.Sqrt(Maximum) + 1; C++)
         {
-            if (Primes[C - 1])
+            for (int N = (int)Math.Pow(C, 2); N <= Maximum; N += C)
             {
-                for (int N = (int)Math.Pow(C, 2); N <= Maximum; N += C)
-                {
-                    Primes[N - 1] = false;
-                }
+                Primes[N - 1] = false;
             }
         }
 
@@ -40,9 +33,9 @@ public class PrimesSieve
             }
         }
 
-        Console.WriteLine();
-        Console.WriteLine($"\nThere are {Count} primes up to {Maximum}");
-        Console.Write("\nPress a key to exit.");
+        Console.WriteLine("\n");
+        Console.WriteLine($"There are {Count} primes up to {Maximum}"); //Primes.Count(B => B == true)
+        Console.Write("Press a key to exit.");
         Console.ReadKey();
     }
 }
