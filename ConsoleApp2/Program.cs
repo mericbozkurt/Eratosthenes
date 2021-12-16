@@ -24,7 +24,7 @@ public class PrimesSieve
             }
         }
 
-        for (int C = 2; C < Primes.Length; C++)
+        for (int C = 2; C <= Primes.Length; C++) //Just "<" if we don't want to include the entered number.
         {
             if (Primes[C - 1])
             {
